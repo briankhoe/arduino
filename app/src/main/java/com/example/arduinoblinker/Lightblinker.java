@@ -39,7 +39,10 @@ public class Lightblinker extends Activity implements SensorEventListener {
     private float deltaX = 0;
     private float vibrateThreshold = 0;
     private TextView currentX, maxX;
+<<<<<<< HEAD
     private int x;
+=======
+>>>>>>> FETCH_HEAD
 
     public Vibrator v;
 
@@ -119,6 +122,10 @@ public class Lightblinker extends Activity implements SensorEventListener {
     }
 
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> FETCH_HEAD
     public void initializeViews() {
         currentX = (TextView) findViewById(R.id.currentX);
         maxX = (TextView) findViewById(R.id.maxX);
@@ -243,6 +250,7 @@ public class Lightblinker extends Activity implements SensorEventListener {
 
     public void blinkLED(View v) {
         byte[] buffer = new byte[1];
+<<<<<<< HEAD
         if (buttonLED.isChecked()) {
             buffer[0] = (byte) 0; // button says on, light is off
 
@@ -264,6 +272,27 @@ public class Lightblinker extends Activity implements SensorEventListener {
             buffer[0] = (byte) 1; // button says off, light is on
 
         }
+=======
+        if(buttonLED.isChecked())
+            buffer[0]=(byte)0; // button says on, light is off
+
+        while (mInputStream != null) {
+            try {
+
+                if (mInputStream.read() == currentX); {
+
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }
+        return 'a';
+
+
+        else
+            buffer[0]=(byte)1; // button says off, light is on
+>>>>>>> FETCH_HEAD
 
         if (mOutputStream != null) {
             try {
@@ -272,8 +301,12 @@ public class Lightblinker extends Activity implements SensorEventListener {
                 Log.e(TAG, "write failed", e);
             }
         }
+<<<<<<< HEAD
 
     }
 }
+=======
+    }
+>>>>>>> FETCH_HEAD
 
 
