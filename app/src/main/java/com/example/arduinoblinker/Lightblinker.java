@@ -33,20 +33,16 @@ public class Lightblinker extends Activity implements SensorEventListener {
 
     //accelerometer code
     private float lastX, lastY, lastZ;
-
     private SensorManager sensorManager;
     private Sensor accelerometer;
-
     private float deltaXMax = 0;
     private float deltaYMax = 0;
     private float deltaZMax = 0;
-
     private float deltaX = 0;
     private float deltaY = 0;
     private float deltaZ = 0;
 
     private float vibrateThreshold = 0;
-
     private TextView currentX, currentY, currentZ, maxX, maxY, maxZ;
 
     public Vibrator v;
@@ -110,6 +106,7 @@ public class Lightblinker extends Activity implements SensorEventListener {
         }
 
         setContentView(R.layout.activity_main);
+
         initializeViews();
 
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
@@ -276,9 +273,7 @@ public class Lightblinker extends Activity implements SensorEventListener {
     }
 
     public void blinkLED(View v){
-
         byte[] buffer = new byte[1];
-
         if(buttonLED.isChecked())
             buffer[0]=(byte)0; // button says on, light is off
         else

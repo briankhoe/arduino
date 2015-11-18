@@ -78,7 +78,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="89dp"
         android:background="#ffffff"
         android:gravity="center|top"
         android:orientation="horizontal" >
@@ -161,5 +161,17 @@
                 android:textSize="15dp" />
         </LinearLayout>
     </LinearLayout>
+
+    <ToggleButton
+        android:text="@string/ToggleButton"
+        android:id="@+id/toggleButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:textSize="50sp"
+        android:onClick="blinkLED"
+        android:layout_gravity="center_horizontal"
+        android:checked="false" />
 
 </LinearLayout>

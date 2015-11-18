@@ -2,32 +2,32 @@
 <items version="2" >
 
     <item
-        jar="/Users/intern/Downloads/arduinoblinker_copy_Wax&apos;s original/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.0/jars/libs/internal_impl-23.0.0.jar"
-        jumboMode="false"
-        revision="23.0.0"
-        sha1="8bd336eeae661e8311330284897ee07f8ebaa297">
-        <dex dex="/Users/intern/Downloads/arduinoblinker_copy_Wax&apos;s original/app/build/intermediates/pre-dexed/debug/internal_impl-23.0.0-45dcbe7cb6aa5162f91f2548fb166fa7170a9b1c.jar" />
-    </item>
-    <item
-        jar="/Users/intern/Downloads/arduinoblinker_copy_Wax&apos;s original/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.0/jars/classes.jar"
-        jumboMode="false"
-        revision="23.0.0"
-        sha1="8413c27b45b7fe61dca4a98159f65e2cee215f5a">
-        <dex dex="/Users/intern/Downloads/arduinoblinker_copy_Wax&apos;s original/app/build/intermediates/pre-dexed/debug/classes-93a5d39f6b01cb7f28a0857072786245a3a60048.jar" />
-    </item>
-    <item
-        jar="/Users/intern/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/23.0.0/support-annotations-23.0.0.jar"
+        jar="/Users/leighanneoh/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/23.0.0/support-annotations-23.0.0.jar"
         jumboMode="false"
         revision="23.0.0"
         sha1="990e7f98a7bad86a40b1f0bcfeb039023afd0839">
-        <dex dex="/Users/intern/Downloads/arduinoblinker_copy_Wax&apos;s original/app/build/intermediates/pre-dexed/debug/support-annotations-23.0.0-339424ade861fa255231ab096632ca604d72b268.jar" />
+        <dex dex="/Users/leighanneoh/AndroidStudioProjects/arduino_brian/app/build/intermediates/pre-dexed/debug/support-annotations-23.0.0-82b9277236d8409e84c4e19568bf307d01c8daf5.jar" />
     </item>
     <item
-        jar="/Users/intern/Downloads/arduinoblinker_copy_Wax&apos;s original/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.0/jars/classes.jar"
+        jar="/Users/leighanneoh/AndroidStudioProjects/arduino_brian/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.0/jars/classes.jar"
         jumboMode="false"
         revision="23.0.0"
         sha1="4fcf0b1879f8caf497c073e1432d398e9e2988c1">
-        <dex dex="/Users/intern/Downloads/arduinoblinker_copy_Wax&apos;s original/app/build/intermediates/pre-dexed/debug/classes-8575204c97835530d8a57b85fde239c5bc7d57c9.jar" />
+        <dex dex="/Users/leighanneoh/AndroidStudioProjects/arduino_brian/app/build/intermediates/pre-dexed/debug/classes-a55a358e8b28d9b29d22c49681d8d5f4e79d1169.jar" />
+    </item>
+    <item
+        jar="/Users/leighanneoh/AndroidStudioProjects/arduino_brian/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.0"
+        sha1="8413c27b45b7fe61dca4a98159f65e2cee215f5a">
+        <dex dex="/Users/leighanneoh/AndroidStudioProjects/arduino_brian/app/build/intermediates/pre-dexed/debug/classes-7ca165844a896f5dac49fa97115f908a80129a16.jar" />
+    </item>
+    <item
+        jar="/Users/leighanneoh/AndroidStudioProjects/arduino_brian/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.0/jars/libs/internal_impl-23.0.0.jar"
+        jumboMode="false"
+        revision="23.0.0"
+        sha1="8bd336eeae661e8311330284897ee07f8ebaa297">
+        <dex dex="/Users/leighanneoh/AndroidStudioProjects/arduino_brian/app/build/intermediates/pre-dexed/debug/internal_impl-23.0.0-d7e6c5349f241ed15d007f1574e6214cb75e14a1.jar" />
     </item>
 
 </items>
