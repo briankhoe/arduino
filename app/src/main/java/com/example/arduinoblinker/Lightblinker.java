@@ -36,28 +36,20 @@ public class Lightblinker extends Activity implements SensorEventListener {
     private SensorManager sensorManager;
     private Sensor accelerometer;
     private float deltaXMax = 0;
-    private float deltaYMax = 0;
-    private float deltaZMax = 0;
     private float deltaX = 0;
-    private float deltaY = 0;
-    private float deltaZ = 0;
-
     private float vibrateThreshold = 0;
-    private TextView currentX, currentY, currentZ, maxX, maxY, maxZ;
+    private TextView currentX, maxX;
+    private int x;
 
     public Vibrator v;
 
     // TAG is used to debug in Android logcat console
     private static final String TAG = "ArduinoAccessory";
-
     private static final String ACTION_USB_PERMISSION = "com.example.arduinoblinker.action.USB_PERMISSION";
-
     private UsbManager mUsbManager;
     private PendingIntent mPermissionIntent;
     private boolean mPermissionRequestPending;
     private ToggleButton buttonLED;
-
-
     UsbAccessory mAccessory;
     ParcelFileDescriptor mFileDescriptor;
     FileInputStream mInputStream;
@@ -69,7 +61,7 @@ public class Lightblinker extends Activity implements SensorEventListener {
             String action = intent.getAction();
             if (ACTION_USB_PERMISSION.equals(action)) {
                 synchronized (this) {
-                    UsbAccessory accessory = (UsbAccessory)intent.getParcelableExtra(UsbManager.EXTRA_ACCESSORY);
+                    UsbAccessory accessory = (UsbAccessory) intent.getParcelableExtra(UsbManager.EXTRA_ACCESSORY);
                     if (intent.getBooleanExtra(UsbManager.EXTRA_PERMISSION_GRANTED, false)) {
                         openAccessory(accessory);
                     } else {
@@ -79,7 +71,8 @@ public class Lightblinker extends Activity implements SensorEventListener {
                     mPermissionRequestPending = false;
                 }
             } else if (UsbManager.ACTION_USB_ACCESSORY_DETACHED.equals(action)) {
-                UsbAccessory accessory = (UsbAccessory)intent.getParcelableExtra(UsbManager.EXTRA_ACCESSORY); {
+                UsbAccessory accessory = (UsbAccessory) intent.getParcelableExtra(UsbManager.EXTRA_ACCESSORY);
+                {
                     if (accessory != null && accessory.equals(mAccessory)) {
                         closeAccessory();
                     }
@@ -89,11 +82,13 @@ public class Lightblinker extends Activity implements SensorEventListener {
     };
 
 
-
     @SuppressWarnings("deprecation")
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        initializeViews();
+
 
         mUsbManager = (UsbManager) getSystemService(Context.USB_SERVICE);
         mPermissionIntent = PendingIntent.getBroadcast(this, 0, new Intent(ACTION_USB_PERMISSION), 0);
@@ -105,10 +100,6 @@ public class Lightblinker extends Activity implements SensorEventListener {
             mAccessory = (UsbAccessory) getLastNonConfigurationInstance();
             openAccessory(mAccessory);
         }
-
-        setContentView(R.layout.activity_main);
-
-        initializeViews();
 
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         if (sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER) != null) {
@@ -123,10 +114,10 @@ public class Lightblinker extends Activity implements SensorEventListener {
 
         //initialize vibration
         v = (Vibrator) this.getSystemService(Context.VIBRATOR_SERVICE);
-
         buttonLED = (ToggleButton) findViewById(R.id.toggleButton);
 
     }
+
 
     public void initializeViews() {
         currentX = (TextView) findViewById(R.id.currentX);
@@ -136,12 +127,10 @@ public class Lightblinker extends Activity implements SensorEventListener {
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
-
     }
 
     @Override
     public void onSensorChanged(SensorEvent event) {
-
         // clean current values
         displayCleanValues();
         // display the current x,y,z accelerometer values
@@ -155,14 +144,14 @@ public class Lightblinker extends Activity implements SensorEventListener {
         // if the change is below 2, it is just plain noise
         if (deltaX < 2)
             deltaX = 0;
-        }
+    }
 
 
     public void displayCleanValues() {
         currentX.setText("0.0");
     }
 
-    // display the current x,y,z accelerometer values
+    // display the current x accelerometer values
     public void displayCurrentValues() {
         currentX.setText(Float.toString(deltaX));
     }
@@ -174,6 +163,7 @@ public class Lightblinker extends Activity implements SensorEventListener {
             maxX.setText(Float.toString(deltaXMax));
         }
     }
+
     @SuppressWarnings("deprecation")
     @Override
     public Object onRetainNonConfigurationInstance() {
@@ -200,7 +190,7 @@ public class Lightblinker extends Activity implements SensorEventListener {
             } else {
                 synchronized (mUsbReceiver) {
                     if (!mPermissionRequestPending) {
-                        mUsbManager.requestPermission(accessory,mPermissionIntent);
+                        mUsbManager.requestPermission(accessory, mPermissionIntent);
                         mPermissionRequestPending = true;
                     }
                 }
@@ -251,12 +241,29 @@ public class Lightblinker extends Activity implements SensorEventListener {
         }
     }
 
-    public void blinkLED(View v){
+    public void blinkLED(View v) {
         byte[] buffer = new byte[1];
-        if(buttonLED.isChecked())
-            buffer[0]=(byte)0; // button says on, light is off
-        else
-            buffer[0]=(byte)1; // button says off, light is on
+        if (buttonLED.isChecked()) {
+            buffer[0] = (byte) 0; // button says on, light is off
+
+            while (mInputStream != null) {
+                try {
+
+                    int temp = mInputStream.read();
+
+                    if (temp > x) {
+                        x = temp;
+                    }
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        } else {
+            buffer[0] = (byte) 1; // button says off, light is on
+
+        }
 
         if (mOutputStream != null) {
             try {
@@ -265,10 +272,8 @@ public class Lightblinker extends Activity implements SensorEventListener {
                 Log.e(TAG, "write failed", e);
             }
         }
+
     }
-
-
-
 }
 
 
