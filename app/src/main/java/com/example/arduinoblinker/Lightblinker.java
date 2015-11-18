@@ -57,6 +57,7 @@ public class Lightblinker extends Activity implements SensorEventListener {
     private boolean mPermissionRequestPending;
     private ToggleButton buttonLED;
 
+
     UsbAccessory mAccessory;
     ParcelFileDescriptor mFileDescriptor;
     FileInputStream mInputStream;
@@ -123,7 +124,7 @@ public class Lightblinker extends Activity implements SensorEventListener {
         //initialize vibration
         v = (Vibrator) this.getSystemService(Context.VIBRATOR_SERVICE);
 
-        buttonLED = (ToggleButton) findViewById(R.id.toggleButtonLED);
+        buttonLED = (ToggleButton) findViewById(R.id.toggleButton);
 
     }
 
