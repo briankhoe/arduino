@@ -261,9 +261,8 @@ public class Lightblinker extends Activity implements SensorEventListener {
             if (mInputStream != null) {
                 try {
 
-                    if (mInputStream.read() == currentX) {
+                    if (mInputStream.read() == currentX); {
 
-                        return currentX;
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
