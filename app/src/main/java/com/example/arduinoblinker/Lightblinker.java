@@ -130,12 +130,8 @@ public class Lightblinker extends Activity implements SensorEventListener {
 
     public void initializeViews() {
         currentX = (TextView) findViewById(R.id.currentX);
-        currentY = (TextView) findViewById(R.id.currentY);
-        currentZ = (TextView) findViewById(R.id.currentZ);
-
         maxX = (TextView) findViewById(R.id.maxX);
-        maxY = (TextView) findViewById(R.id.maxY);
-        maxZ = (TextView) findViewById(R.id.maxZ);
+
     }
 
     @Override
@@ -155,30 +151,20 @@ public class Lightblinker extends Activity implements SensorEventListener {
 
         // get the change of the x,y,z values of the accelerometer
         deltaX = Math.abs(lastX - event.values[0]);
-        deltaY = Math.abs(lastY - event.values[1]);
-        deltaZ = Math.abs(lastZ - event.values[2]);
 
         // if the change is below 2, it is just plain noise
         if (deltaX < 2)
             deltaX = 0;
-        if (deltaY < 2)
-            deltaY = 0;
-        if ((deltaZ > vibrateThreshold) || (deltaY > vibrateThreshold) || (deltaZ > vibrateThreshold)) {
-            v.vibrate(50);
         }
-    }
+
 
     public void displayCleanValues() {
         currentX.setText("0.0");
-        currentY.setText("0.0");
-        currentZ.setText("0.0");
     }
 
     // display the current x,y,z accelerometer values
     public void displayCurrentValues() {
         currentX.setText(Float.toString(deltaX));
-        currentY.setText(Float.toString(deltaY));
-        currentZ.setText(Float.toString(deltaZ));
     }
 
     // display the max x,y,z accelerometer values
@@ -186,14 +172,6 @@ public class Lightblinker extends Activity implements SensorEventListener {
         if (deltaX > deltaXMax) {
             deltaXMax = deltaX;
             maxX.setText(Float.toString(deltaXMax));
-        }
-        if (deltaY > deltaYMax) {
-            deltaYMax = deltaY;
-            maxY.setText(Float.toString(deltaYMax));
-        }
-        if (deltaZ > deltaZMax) {
-            deltaZMax = deltaZ;
-            maxZ.setText(Float.toString(deltaZMax));
         }
     }
     @SuppressWarnings("deprecation")
@@ -288,6 +266,8 @@ public class Lightblinker extends Activity implements SensorEventListener {
             }
         }
     }
+
+
 
 }
 
