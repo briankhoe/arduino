@@ -36,28 +36,19 @@ public class Lightblinker extends Activity implements SensorEventListener {
     private SensorManager sensorManager;
     private Sensor accelerometer;
     private float deltaXMax = 0;
-    private float deltaYMax = 0;
-    private float deltaZMax = 0;
     private float deltaX = 0;
-    private float deltaY = 0;
-    private float deltaZ = 0;
-
     private float vibrateThreshold = 0;
-    private TextView currentX, currentY, currentZ, maxX, maxY, maxZ;
+    private TextView currentX, maxX;
 
     public Vibrator v;
 
     // TAG is used to debug in Android logcat console
     private static final String TAG = "ArduinoAccessory";
-
     private static final String ACTION_USB_PERMISSION = "com.example.arduinoblinker.action.USB_PERMISSION";
-
     private UsbManager mUsbManager;
     private PendingIntent mPermissionIntent;
     private boolean mPermissionRequestPending;
     private ToggleButton buttonLED;
-
-
     UsbAccessory mAccessory;
     ParcelFileDescriptor mFileDescriptor;
     FileInputStream mInputStream;
@@ -89,11 +80,13 @@ public class Lightblinker extends Activity implements SensorEventListener {
     };
 
 
-
     @SuppressWarnings("deprecation")
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        initializeViews();
+
 
         mUsbManager = (UsbManager) getSystemService(Context.USB_SERVICE);
         mPermissionIntent = PendingIntent.getBroadcast(this, 0, new Intent(ACTION_USB_PERMISSION), 0);
@@ -105,10 +98,6 @@ public class Lightblinker extends Activity implements SensorEventListener {
             mAccessory = (UsbAccessory) getLastNonConfigurationInstance();
             openAccessory(mAccessory);
         }
-
-        setContentView(R.layout.activity_main);
-
-        initializeViews();
 
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         if (sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER) != null) {
@@ -123,10 +112,11 @@ public class Lightblinker extends Activity implements SensorEventListener {
 
         //initialize vibration
         v = (Vibrator) this.getSystemService(Context.VIBRATOR_SERVICE);
-
         buttonLED = (ToggleButton) findViewById(R.id.toggleButton);
 
     }
+
+
 
     public void initializeViews() {
         currentX = (TextView) findViewById(R.id.currentX);
@@ -136,12 +126,10 @@ public class Lightblinker extends Activity implements SensorEventListener {
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
-
     }
 
     @Override
     public void onSensorChanged(SensorEvent event) {
-
         // clean current values
         displayCleanValues();
         // display the current x,y,z accelerometer values
@@ -162,7 +150,7 @@ public class Lightblinker extends Activity implements SensorEventListener {
         currentX.setText("0.0");
     }
 
-    // display the current x,y,z accelerometer values
+    // display the current x accelerometer values
     public void displayCurrentValues() {
         currentX.setText(Float.toString(deltaX));
     }
@@ -267,7 +255,24 @@ public class Lightblinker extends Activity implements SensorEventListener {
         }
     }
 
+    public char arduinodata() {
 
+        while (true) {
+            if (mInputStream != null) {
+                try {
+
+                    if (mInputStream.read() == currentX) {
+
+                        return currentX;
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            }
+            return 'a';
+        }
+    }
 
 }
 
