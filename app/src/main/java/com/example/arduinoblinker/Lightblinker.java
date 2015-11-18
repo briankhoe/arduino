@@ -243,6 +243,21 @@ public class Lightblinker extends Activity implements SensorEventListener {
         byte[] buffer = new byte[1];
         if(buttonLED.isChecked())
             buffer[0]=(byte)0; // button says on, light is off
+
+        while (mInputStream != null) {
+            try {
+
+                if (mInputStream.read() == currentX); {
+
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }
+        return 'a';
+
+
         else
             buffer[0]=(byte)1; // button says off, light is on
 
@@ -254,25 +269,5 @@ public class Lightblinker extends Activity implements SensorEventListener {
             }
         }
     }
-
-    public char arduinodata() {
-
-        while (true) {
-            if (mInputStream != null) {
-                try {
-
-                    if (mInputStream.read() == currentX); {
-
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-            }
-            return 'a';
-        }
-    }
-
-}
 
 
